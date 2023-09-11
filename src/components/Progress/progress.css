@@ -1,0 +1,3 @@
+.level {
+  @apply relative before:absolute before:w-[1px] before:h-[5px] before:bg-[#2d9ba380] before:left-1/2 before:-top-1.5;
+}
