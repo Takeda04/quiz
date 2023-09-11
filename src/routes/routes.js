@@ -1,4 +1,3 @@
-import { lazy } from 'react';
 import { Home, Login, Question } from '../pages';
 
 export const routes = [

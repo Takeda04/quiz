@@ -6,13 +6,13 @@ import { Home } from './pages';
 
 function App() {
   return (
-    <div className='App bg-[#000B23] h-screen overflow-hidden'>
-      <div className='max-w-[390px] h-full mx-auto'>
+    <div className='App bg-[#000B23] min-h-screen h-full overflow-x-hidden'>
+      <div className='max-w-[390px] min-h-screen h-full mx-auto'>
         <Routes>
-          {routes?.map(({ path, element: Component }) => (
+          <Route path='*' element={<Home />} />
+          {routes.map(({ path, element: Component }) => (
             <Route key={v4()} path={path} element={<Component />} />
           ))}
-          <Route path='*' element={<Home />} />
         </Routes>
       </div>
     </div>
