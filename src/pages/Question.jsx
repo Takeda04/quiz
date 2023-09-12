@@ -34,6 +34,10 @@ const Question = () => {
       setAnswers([...answers, quiz.category]);
     }
 
+    // Reset the checked and choicedId states here
+    setChecked(false);
+    setChoicedId('');
+
     if (quizMax == currentQuestion) setShowCongrats(true);
   };
 
@@ -80,10 +84,11 @@ const Question = () => {
                         setChoicedId(e.target.id);
                       }}
                       className='checked:bg-[#F2F6FF] bg-[#A4A0A0]'
+                      checked={choicedId === ans.id} // Add this line to control the checked state
                     />
                   </div>
                   <label htmlFor={ans.id}>
-                    <span className='uppercase'>{ans.id})</span> {ans.answer}
+                    <span className='uppercase'>{ans.id}</span> {ans.answer}
                   </label>
                 </div>
               ))}
