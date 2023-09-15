@@ -13,11 +13,23 @@ const Home = () => {
         <div className='flex flex-col gap-[24px] py-[30px] w-[240px] bg-[#4F2486] rounded-[16px]'>
           <h1 className='text-[22px] font-semibold text-center font-[Gilroy]'>Выбери язык</h1>
           <div className='flex items-center gap-[10px] justify-center'>
-            <Link to={'/login'} className={btnClass}>
+            <Link
+              to={'/login'}
+              onClick={() => {
+                window.localStorage.setItem('lang', 'ru');
+              }}
+              className={btnClass}
+            >
               Русский
             </Link>
 
-            <Link to={'/login'} className={btnClass}>
+            <Link
+              to={'/login'}
+              className={btnClass}
+              onClick={() => {
+                window.localStorage.setItem('lang', 'uz');
+              }}
+            >
               Ozbek
             </Link>
           </div>

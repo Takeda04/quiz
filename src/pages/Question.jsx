@@ -3,7 +3,6 @@ import logo from '../assets/question-logo.svg';
 import congrats from '../assets/congrat.png';
 import { Button, Progress } from '../components';
 import { quizes } from '../data';
-import { useNavigate } from 'react-router-dom';
 
 const Question = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -12,11 +11,13 @@ const Question = () => {
   const [answers, setAnswers] = useState([]);
   const [choicedId, setChoicedId] = useState('');
   const [checked, setChecked] = useState(false);
-  const quiz = quizes[currentQuestion];
-  const quizMax = quizes.at(-1).id - 1;
+  const lang = localStorage.getItem('lang');
+  const quizs = quizes.find(q => q.language == lang).question;
+  const quiz = quizs[currentQuestion];
+  const quizMax = quizs.at(-1).id - 1;
   let array = [];
 
-  quizes.forEach(element => {
+  quizs.forEach(element => {
     array.push(element.category);
   });
 
@@ -30,11 +31,10 @@ const Question = () => {
     setCurrentQuestion(state => state + 1);
 
     if (answer) {
-      setProgress(state => (state += 100 / quizes.length));
+      setProgress(state => (state += 100 / quizs.length));
       setAnswers([...answers, quiz.category]);
     }
 
-    // Reset the checked and choicedId states here
     setChecked(false);
     setChoicedId('');
 
@@ -56,7 +56,7 @@ const Question = () => {
               Ты дошел до {progress == 100 ? 'конца' : Math.round(progress) + '%'}! Твои результаты следующие:
             </h3>
             <ul className='list-decimal text-white'>
-              {uniqueArr.map((categ, i) => (
+              {uniqueArr?.map((categ, i) => (
                 <li key={i}>
                   {categ} ({answers.filter(ans => ans == categ).length})
                 </li>
@@ -72,7 +72,7 @@ const Question = () => {
             <h2 className='text-[24px] text-white font-semibold '>{quiz.id} Вопрос</h2>
             <h3 className='text-base font-bold text-white capitalize mt-[24px]'>{quiz.question_title}</h3>
             <form action='' className='flex flex-col mt-[57px] gap-[39px]' onSubmit={handleSubmit}>
-              {quiz.answers.map((ans, i) => (
+              {quiz?.answers?.map((ans, i) => (
                 <div className='text-white flex items-center gap-[16px]' key={i}>
                   <div className='mt-0.5'>
                     <input
@@ -84,11 +84,11 @@ const Question = () => {
                         setChoicedId(e.target.id);
                       }}
                       className='checked:bg-[#F2F6FF] bg-[#A4A0A0]'
-                      checked={choicedId === ans.id} // Add this line to control the checked state
+                      checked={choicedId === ans.id}
                     />
                   </div>
                   <label htmlFor={ans.id}>
-                    <span className='uppercase'>{ans.id}</span> {ans.answer}
+                    <span className='uppercase'>{ans.id})</span> {ans.answer}
                   </label>
                 </div>
               ))}
