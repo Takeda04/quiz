@@ -1,4 +1,5 @@
 import { Home, Login, Question } from '../pages';
+import Contact from '../pages/Contact';
 
 export const routes = [
   {
@@ -12,5 +13,9 @@ export const routes = [
   {
     path: '/questions',
     element: Question,
+  },
+  {
+    path: '/contact',
+    element: Contact,
   },
 ];
