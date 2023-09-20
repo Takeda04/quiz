@@ -3,6 +3,7 @@ import logo from '../assets/question-logo.svg';
 import congrats from '../assets/congrat.png';
 import { Button, Progress } from '../components';
 import { quizes } from '../data';
+import { Link } from 'react-router-dom';
 
 const Question = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -64,7 +65,9 @@ const Question = () => {
             </ul>
             <div className='w-full text-center flex items-center justify-center flex-col gap-[100px] mt-[42px]'>
               <img src={congrats} alt='' />
-              <Button type={'submit'} text={'Далее'} disabled={true} />
+              <Link to={'/contact'}>
+                <Button type={'submit'} text={'Далее'} />
+              </Link>
             </div>
           </>
         ) : (
